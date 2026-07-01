@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import styles from './Auth.module.css';
+import styles from './auth.module.css';
 
 export default function Register() {
   const { register } = useAuth();
