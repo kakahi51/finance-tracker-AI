@@ -1,0 +1,12 @@
+/* Reset margin bawaan browser dan set font global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f0;
+  color: #1a1a18;
+}
