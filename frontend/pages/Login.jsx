@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // PENTING: Tambah Link di sini
+import styles from './auth.module.css'; // PENTING: Hubungkan CSS lo agar tidak polosan
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -13,24 +14,53 @@ export default function Login() {
     e.preventDefault();
     setError('');
 
-    // JANGAN kirim pake objek seperti login({ email, password }) 
-    // Kirim sebagai dua argumen terpisah sesuai fungsi di useAuth.jsx lo!
     const result = await login(email, password); 
 
-    // Proteksi: pastikan result tidak undefined sebelum baca .success
     if (result && result.success) {
       navigate('/dashboard');
     } else {
-      setError(result?.message || 'Login gagal');
+      setError(result?.message || 'Login gagal, periksa koneksi backend lo.');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-      <button type="submit">Login</button>
-    </form>
+    <div className={styles.authContainer}>
+      <div className={styles.authCard}>
+        <h2>Login Finance Tracker</h2>
+        
+        {error && <p className={styles.errorMessage}>{error}</p>}
+        
+        <form onSubmit={handleSubmit} className={styles.authForm}>
+          <div className={styles.inputGroup}>
+            <label>Email Address</label>
+            <input 
+              type="email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              placeholder="Masukkan email lo"
+              required 
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label>Password</label>
+            <input 
+              type="password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              placeholder="Masukkan password"
+              required 
+            />
+          </div>
+
+          <button type="submit" className={styles.authButton}>Login</button>
+        </form>
+
+        {/* TOMBOL REGISTER YANG HILANG SUDAH DI SINI */}
+        <p className={styles.authSwitchText}>
+          Belum punya akun? <Link to="/register" className={styles.authLink}>Daftar di sini</Link>
+        </p>
+      </div>
+    </div>
   );
 }

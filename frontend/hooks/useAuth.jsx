@@ -84,6 +84,7 @@ export function useAuth() {
 }
 
 // TAMBAHKAN BARIS INI UNTUK DIAGNOSA
-console.log("NILAI ASLI API DI VITE:", import.meta.env?.VITE_API_URL);
+// JANGAN LANGSUNG TULIS 'http://localhost:5000' SECARA ABSOLUT!
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 // Kode axios lo di bawahnya
