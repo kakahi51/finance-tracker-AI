@@ -24,9 +24,9 @@ export default function Dashboard() {
     if (!window.confirm("Yakin mau hapus transaksi ini?")) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(await axios.post(`${import.meta.env.VITE_API_URL}/api/transactions/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/transactions/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
-      }));
+      });
       refetch();
     } catch (err) {
       console.error("Gagal menghapus transaksi:", err);
